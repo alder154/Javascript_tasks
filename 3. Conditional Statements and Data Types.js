@@ -14,11 +14,11 @@ console.log("2" * false);
 console.log("abc" * false); //NaN
 console.log("abc" * true); //NaN
 
-console.log("2" * 2);
-console.log("abc" * 2); //NaN
-
 console.log(2 * false);
 console.log(2 * true);
+
+console.log("2" * 2);
+console.log("abc" * 2); //NaN
 
 //string/boolean, string/number, number/Boolean
 console.log("2" / true);
