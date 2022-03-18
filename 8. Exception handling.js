@@ -2,7 +2,7 @@ try {
   console.log(a);
   let a = 3;
 } catch (err) {
-  alert("let перед использованием нужно объявить!");
+  console.log("let перед использованием нужно объявить!");
 }
 
 try {
@@ -11,5 +11,5 @@ try {
     throw err;
   }
 } catch (err) {
-  alert("на ноль делить нельзя!");
+  console.log("на ноль делить нельзя!");
 }
