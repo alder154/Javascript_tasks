@@ -28,6 +28,8 @@ console.log("abc" / false); //Nan
 
 console.log("2" / 2);
 console.log("abc" / 2); //Nan
+console.log(2 / true);
+console.log(2 / false); //infinity
 
 //явное преобразование (string, boolean, number):
 
