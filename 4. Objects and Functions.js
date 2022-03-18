@@ -5,19 +5,22 @@ let car = {
   color: "black",
 };
 car.color = "green";
-car.power = prompt("enter the power");
+
+car.hp = 350;
+car.power = function() {
+  console.log('this car is ' + this.hp +' horsepower')
+}
 
 /* В терминале оплаты сохранено ваше имя, напишите функцию для определения 
 имени в терминале(если вы ввели ваше имя, то привет + имя, если нет, то нет такого имени)*/
 
-function showMessage() {
-  let userName = prompt("Enter your name", "Name");
-  if (userName == "Aleksandr") {
-    var message = "Hello, " + userName + "!";
+function showMessage(userName) {
+  if (userName === "Aleksandr") {
+    let message = "Hello, " + userName + "!";
   } else {
-    var message = "sorry, no such name";
+    let message = "sorry, no such name";
   }
-  alert(message);
+  console.log(message);
 }
 
 showMessage();
@@ -25,10 +28,8 @@ showMessage();
 /*На склад принимают груши и яблоки, напишите функцию, которая возвращает результат 
 сложения количества принятых груш и яблок*/
 
-function fruitsAmount() {
-  let apples = prompt("Enter apples amount");
-  let pears = prompt("Enter pears ammount");
-  alert("Total amount is " + (+apples + +pears) + " fruits!");
+function fruitsAmount(apples, pears) {
+  console.log("Total amount is " + (apples + pears) + " fruits!");
 }
 
 fruitsAmount();
@@ -36,20 +37,20 @@ fruitsAmount();
 //Напишите функцию вычисления типа аргумента и вывод типа в консоль
 
 function yourArgumentType(argument) {
-  alert("Type of your argument is " + typeof argument);
+  console.log("Type of your argument is " + typeof argument);
 }
 
-yourArgumentType(10n); // bigint
+yourArgumentType(10n);
 
 //Напишите функцию, которая определяет является ли число простым или нет
 
 function isPrime(x) {
   let flag = true;
-  if (1 <= x && x <= 3) {
-    console.log(x + " is a prime number");
+  if (x < 2) {
+    console.log(x + " is not a prime number");
   } else {
     for (n = 2; n <= x ** 0.5; n++) {
-      if (x % n == 0) {
+      if (x % n === 0) {
         flag = false;
         break;
       }
@@ -59,5 +60,5 @@ function isPrime(x) {
     } else {
       console.log(x + " is not a prime number");
     }
-  }
+   }
 }
