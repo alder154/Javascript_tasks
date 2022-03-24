@@ -7,20 +7,19 @@ let car = {
 car.color = "green";
 
 car.hp = 350;
-car.power = function() {
-  console.log('this car is ' + this.hp +' horsepower')
-}
+car.power = function () {
+  console.log("this car is " + this.hp + " horsepower");
+};
 
 /* В терминале оплаты сохранено ваше имя, напишите функцию для определения 
 имени в терминале(если вы ввели ваше имя, то привет + имя, если нет, то нет такого имени)*/
 
 function showMessage(userName) {
   if (userName === "Aleksandr") {
-    let message = "Hello, " + userName + "!";
+    console.log("Hello, " + userName + "!");
   } else {
-    let message = "sorry, no such name";
+    console.log("sorry, no such name");
   }
-  console.log(message);
 }
 
 showMessage();
@@ -49,7 +48,7 @@ function isPrime(x) {
   if (x < 2) {
     console.log(x + " is not a prime number");
   } else {
-    for (n = 2; n <= x ** 0.5; n++) {
+    for (let n = 2; n <= x ** 0.5; n++) {
       if (x % n === 0) {
         flag = false;
         break;
@@ -60,5 +59,5 @@ function isPrime(x) {
     } else {
       console.log(x + " is not a prime number");
     }
-   }
+  }
 }
