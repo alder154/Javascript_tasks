@@ -66,7 +66,7 @@ function lessThan10(a) {
 
 function isPrimeNumber(x) {
   if (x === 2) return x;
-  for (n = 2; n < x; n++) {
+  for (let n = 2; n < x; n++) {
     if (x % n === 0) {
       return false;
     }
@@ -85,7 +85,13 @@ function primeNumberList(nmbr) {
 //Реализовать цикл, который выводит в консоль нечетные числа
 
 function oddNumbers(num) {
-  for (let j = 1; j <= num; j += 2) {
-    console.log(j);
+  if (num > 0) {
+    for (let j = 1; j <= num; j += 2) {
+      console.log(j);
+    }
+  } else {
+    for (let j = -1; j >= num; j -= 2) {
+      console.log(j);
+    }
   }
 }
