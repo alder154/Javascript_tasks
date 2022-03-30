@@ -1,8 +1,8 @@
-import {a} from "./unit_11_1.js";
+import {a} from './unit_11_1.js';
 console.log(a)
 
-import {square_root} from './unit_11_1.js';
-console.log(square_root(9))
+import {get_square_root} from './unit_11_1.js';
+console.log(get_square_root(9))
 
 // also works:
 // import * as digits from "./unit_11_1.js";
