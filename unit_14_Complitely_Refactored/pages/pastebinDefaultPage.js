@@ -1,5 +1,3 @@
-//место для прописывания локаторов
-
 let abstractPage = require("./abstractPage");
 const { By } = require("selenium-webdriver");
 
