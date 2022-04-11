@@ -42,7 +42,7 @@ describe("Bring-it-on", async () => {
     );
   });
 
-  it.skip("click submit button", async () => {
+  it("click submit button", async () => {
       await pastebinDefaultPage.clickElement(pastebinDefaultPage.saveButton)
   })
 
@@ -54,7 +54,6 @@ describe("Bring-it-on", async () => {
   it("validate paste text", async () =>{
       const actualPasteText = await pastebinDefaultPage.getElement(pastebinResultPage.validatePasteText)
       PasteText = await actualPasteText.getText()
-      console.log(PasteText)
       expect(await actualPasteText.getText()).to.be.equal(textPaste)
   })
 
