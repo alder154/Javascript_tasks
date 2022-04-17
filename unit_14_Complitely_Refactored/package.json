@@ -1,0 +1,21 @@
+{
+  "name": "unit_14_complitely_refactored",
+  "version": "1.0.0",
+  "description": "POM in action",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Sanya",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^9.2.2"
+  },
+  "dependencies": {
+    "selenium-webdriver": "^4.1.1"
+  }
+}
