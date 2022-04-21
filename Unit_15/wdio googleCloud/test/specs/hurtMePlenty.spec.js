@@ -1,46 +1,44 @@
+const googleCalcPage = require("../pageobjects/googleCalc.page");
 const GCloudSetupPage = require("../pageobjects/googleCalc.page");
 
 describe("Hurt-me-plenty task", async () => {
   let link = "https://cloud.google.com/";
-  let price = " 4,026.13";
+  let cost = " 4,026.13";
 
-  it("open browser", async () => {
+  before(async () => {
     await GCloudSetupPage.open(link);
-  });
-
-  it("navigate to COMPUTE ENGINE", async () => {
     await GCloudSetupPage.navigateToComputeEngine();
-  });
-
-  it("switch to proper iFrame", async () => {
     await GCloudSetupPage.switchToCalcFrame();
-  });
-
-  it("calculate the price", async () => {
     await GCloudSetupPage.setParamToCalc();
   });
 
   it("validate total cost", async () => {
-    await GCloudSetupPage.validatePrice(price);
+    let price = await GCloudSetupPage.price;
+    await expect(price).toHaveTextContaining(cost);
   });
 
   it("validate VMClass", async () => {
-    await GCloudSetupPage.validateVMClass();
+    let VMClass = await GCloudSetupPage.VMClass;
+    await expect(VMClass).toHaveTextContaining("regular");
   });
 
   it("validate instance type", async () => {
-    await GCloudSetupPage.validateInstType();
+    let instType = await GCloudSetupPage.instType;
+    await expect(instType).toHaveTextContaining("n1-standard-8");
   });
 
   it("validate region", async () => {
-    await GCloudSetupPage.validateRegion();
+    let region = await GCloudSetupPage.region;
+    await expect(region).toHaveTextContaining("Frankfurt");
   });
 
   it("validate SSD setup", async () => {
-    await GCloudSetupPage.validateSSD();
+    let SSD = await GCloudSetupPage.SSD;
+    await expect(SSD).toHaveTextContaining("2x375");
   });
 
   it("validate commitment term", async () => {
-    await GCloudSetupPage.validateTerm();
+    let term = await GCloudSetupPage.term;
+    await expect(term).toHaveTextContaining("1 Year");
   });
 });

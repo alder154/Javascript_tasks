@@ -33,7 +33,7 @@ class YopmailPage extends GCloudPage {
     return $("#ifmail");
   }
 
-  async getPriceToYopmail(mailLink, mailLogin) {
+  async getPriceFromYopmail(mailLink, mailLogin) {
     const tabGoogle = await browser.getWindowHandle();
     await browser.newWindow(mailLink);
 
@@ -60,9 +60,7 @@ class YopmailPage extends GCloudPage {
     let priceFromMail = await await this.mailPrice.getText();
     await browser.switchToWindow(tabGoogle);
     await GCloudSetupPage.switchToCalcFrame();
-    await expect(this.priceFromGoogle).toHaveTextContaining(
-      priceFromMail.slice(-8)
-    );
+    return priceFromMail;
   }
 }
 module.exports = new YopmailPage();

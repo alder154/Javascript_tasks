@@ -151,49 +151,26 @@ class GCloudSetupPage extends GCloudPage {
     await this.estimateButton.click();
   }
 
-  //VALIDATIONS:
   get price() {
     return $("//b");
   }
-  async validatePrice(cost) {
-    await expect(this.price).toHaveTextContaining(cost);
-  }
-
   get VMClass() {
     return $('//md-list-item[contains(@ng-if, "item.items.editHook")]');
-  }
-  async validateVMClass() {
-    await expect(this.VMClass).toHaveTextContaining("regular");
   }
 
   get instType() {
     return $('//div[contains(@ng-class, "item.items.isInstanceCommitted")]');
   }
-  async validateInstType() {
-    await expect(this.instType).toHaveTextContaining("n1-standard-8");
-  }
-
   get region() {
     return $(
       '//md-list/md-list-item/div[@class = "md-list-item-text ng-binding"]'
     );
   }
-  async validateRegion() {
-    await expect(this.region).toHaveTextContaining("Frankfurt");
-  }
-
   get SSD() {
     return $('//md-list-item[contains(@ng-if, "item.items.ssd")]');
   }
-  async validateSSD() {
-    await expect(this.SSD).toHaveTextContaining("2x375");
-  }
-
   get term() {
     return $('//md-list-item[contains(@ng-if, "item.items.termText")]');
-  }
-  async validateTerm() {
-    await expect(this.term).toHaveTextContaining("1 Year");
   }
 }
 

@@ -1,5 +1,5 @@
 const GCloudSetupPage = require("../pageobjects/googleCalc.page");
-const yopmailPage = require("../pageobjects/yopmail.page");
+const YopmailPage = require("../pageobjects/yopmail.page");
 const { generateMail } = require("../../utils/generateMail");
 
 describe("Hardcore", async () => {
@@ -7,23 +7,16 @@ describe("Hardcore", async () => {
   let yopmailLInk = "https://yopmail.com/";
   const mailLogin = generateMail();
 
-  it("open browser", async () => {
+  before(async () => {
     await GCloudSetupPage.open(link);
-  });
-
-  it("navigate to COMPUTE ENGINE", async () => {
     await GCloudSetupPage.navigateToComputeEngine();
-  });
-
-  it("switch to calc frame", async () => {
     await GCloudSetupPage.switchToCalcFrame();
-  });
-
-  it("calculate the price", async () => {
     await GCloudSetupPage.setParamToCalc();
   });
 
-  it("get price email", async () => {
-    await yopmailPage.getPriceToYopmail(yopmailLInk, mailLogin);
+  it("validate price", async () => {
+    let priceYopMail = await YopmailPage.getPriceFromYopmail(yopmailLInk, mailLogin);
+    let priceGoogle = await YopmailPage.priceFromGoogle
+    await expect(priceGoogle).toHaveTextContaining(priceYopMail.slice(-8));
   });
 });
