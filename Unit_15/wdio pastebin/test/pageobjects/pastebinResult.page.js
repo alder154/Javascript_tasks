@@ -1,6 +1,6 @@
-const pastebinPage = require("./pastebin.page");
+const PastebinPage = require("./pastebin.page");
 
-class pastebinResultPage extends pastebinPage {
+class PastebinResultPage extends PastebinPage {
   get bashSyntax() {
     return $('//a[text()="Bash"]');
   }
@@ -10,4 +10,4 @@ class pastebinResultPage extends pastebinPage {
   }
 }
 
-module.exports = new pastebinResultPage();
+module.exports = new PastebinResultPage();

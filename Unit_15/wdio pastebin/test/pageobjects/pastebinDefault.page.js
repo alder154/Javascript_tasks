@@ -1,6 +1,6 @@
-const pastebinPage = require("./pastebin.page");
+const PastebinPage = require("./pastebin.page");
 
-class pastebinDefaultPage extends pastebinPage {
+class PastebinDefaultPage extends PastebinPage {
   get newPasteTextArea() {
     return $("#postform-text");
   }
@@ -51,4 +51,4 @@ class pastebinDefaultPage extends pastebinPage {
   }
 }
 
-module.exports = new pastebinDefaultPage();
+module.exports = new PastebinDefaultPage();

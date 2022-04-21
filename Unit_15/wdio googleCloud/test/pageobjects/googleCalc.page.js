@@ -1,5 +1,5 @@
-const gCloudPage = require("./gCloud.page");
-class gCloudSetupPage extends gCloudPage {
+const GCloudPage = require("./gCloud.page");
+class GCloudSetupPage extends GCloudPage {
   async open(link) {
     return super.open(link);
   }
@@ -11,33 +11,41 @@ class gCloudSetupPage extends gCloudPage {
     return $(".devsite-search-field");
   }
   get clickSearchRes() {
-    return $('//b[text()="Google Cloud Pricing Calculator"]');
+    return $('//b[text()="Google Cloud Pricing Calculator"]'); //
+  }
+
+  get googleCookieAgreement() {
+    return $(".devsite-snackbar-action");
   }
   async navigateToComputeEngine() {
     await this.goSearch.click();
+    const enterKey = await "\uE007";
     await this.searchLine.setValue(
-      "Google Cloud Platform Pricing Calculator\uE007"
+      "Google Cloud Platform Pricing Calculator" + enterKey
     );
     await this.clickSearchRes.click();
+    if (await this.googleCookieAgreement.isExisting()) {
+      await this.googleCookieAgreement.click();
+    }
   }
 
-  get frame1() {
+  get frameGlobal() {
     return $('//*[@id="cloud-site"]/devsite-iframe/iframe');
   }
   get calcFrame() {
     return $("#myFrame");
   }
   async switchToCalcFrame() {
-    const element1 = await this.frame1;
-    await browser.switchToFrame(element1);
-    const element2 = await this.calcFrame;
-    await browser.switchToFrame(element2);
-    await $('//*[text()="Compute Engine"]').click();
-    await browser.switchToFrame(element1);
+    const elementGlobal = await this.frameGlobal;
+    await browser.switchToFrame(elementGlobal);
+    const calcElement = await this.calcFrame;
+    await browser.switchToFrame(calcElement);
   }
 
   get computeEngine() {
-    return $('//*[text()="Compute Engine"]');
+    return $(
+      '//*[@ng-class = "{estimated: listingCtrl.CartData[tab.estimatedLabel]}"]'
+    );
   }
   get numberInstances() {
     return $("#input_81");
@@ -52,7 +60,7 @@ class gCloudSetupPage extends gCloudPage {
     return $("#select_value_label_74");
   }
   get machineClassRegular() {
-    return $('//*[@id="select_option_96"]/div[1]');
+    return $("#select_option_96");
   }
   get instSeriesDropDown() {
     return $("#select_value_label_76");
@@ -64,57 +72,55 @@ class gCloudSetupPage extends gCloudPage {
     return $("#select_value_label_77");
   }
   get mashTypeN130Gb() {
-    return $("#select_option_424");
+    return $("#select_option_427");
   }
   get addGPU() {
-    return $(
-      '//*[@id="mainForm"]/div[2]/div/md-card/md-card-content/div/div[1]/form/div[11]/div[1]/md-input-container/md-checkbox'
-    );
+    return $('//*[@ng-model="listingCtrl.computeServer.addGPUs"]');
   }
   get GPUDropDown() {
-    return $("#select_457");
+    return $("#select_460");
   }
-  get TeslaV100() {
-    return $("#select_option_464");
+  get TeslaP100() {
+    return $("#select_option_465");
   }
   get GPUNumberDropDown() {
-    return $("#select_value_label_456");
+    return $("#select_462");
   }
   get addOneGpu() {
-    return $("#select_option_468");
+    return $("#select_option_471");
   }
   get SSDDropDown() {
-    return $("#select_value_label_418");
+    return $("#select_422");
   }
   get SSD2x375() {
-    return $("#select_option_445");
+    return $("#select_option_448");
   }
   get locationDropDown() {
-    return $("#select_value_label_79");
+    return $("#select_114");
   }
   get locationFrankfurt() {
     return $("#select_option_242");
   }
   get usageDropDown() {
-    return $("#select_value_label_80");
+    return $("#select_121");
   }
   get usage1Year() {
     return $("#select_option_119");
   }
   get estimateButton() {
     return $(
-      '//*[@id="mainForm"]/div[2]/div/md-card/md-card-content/div/div[1]/form/div[18]/button'
+      '//*[@ng-click = "listingCtrl.addComputeServer(ComputeEngineForm);"]'
     );
   }
   async setParamToCalc() {
     await this.computeEngine.click();
     await this.numberInstances.setValue("4");
 
-    await this.setOSDropDown.click(); //ways to validate through expect??
-    await this.setFreeOS.click(); //ways to validate through expect??
+    await this.setOSDropDown.click();
+    await this.setFreeOS.click();
 
-    await this.machineClassDropDown.click(); //ways to validate through expect??
-    await this.machineClassRegular.click(); //ways to validate through expect??
+    await this.machineClassDropDown.click();
+    await this.machineClassRegular.click();
 
     await this.instSeriesDropDown.click();
     await this.instSeriesN1.click();
@@ -128,7 +134,7 @@ class gCloudSetupPage extends gCloudPage {
     await this.addGPU.click();
 
     await this.GPUDropDown.click();
-    await this.TeslaV100.click();
+    await this.TeslaP100.click();
 
     await this.GPUNumberDropDown.click();
     await this.addOneGpu.click();
@@ -141,58 +147,54 @@ class gCloudSetupPage extends gCloudPage {
 
     await this.usageDropDown.click();
     await this.usage1Year.click();
-    // await browser.switchToParentFrame()
-    // await browser.switchToFrame(null)
-    // const element1 = await $('//*[@id="cloud-site"]/devsite-iframe/iframe');
-    // await browser.switchToFrame(element1)
-    // const element2 = await $('//*[@id="myFrame"]');
-    // await browser.switchToFrame(element2) 
 
     await this.estimateButton.click();
   }
 
   //VALIDATIONS:
   get price() {
-    return $('//*[@id="resultBlock"]/md-card/md-card-content/div/div/div/h2/b');
+    return $("//b");
   }
   async validatePrice(cost) {
     await expect(this.price).toHaveTextContaining(cost);
   }
 
   get VMClass() {
-    return $('//*[@id="compute"]/md-list/md-list-item[4]');
+    return $('//md-list-item[contains(@ng-if, "item.items.editHook")]');
   }
   async validateVMClass() {
     await expect(this.VMClass).toHaveTextContaining("regular");
   }
 
   get instType() {
-    return $('//*[@id="compute"]/md-list/md-list-item[5]/div[1]');
+    return $('//div[contains(@ng-class, "item.items.isInstanceCommitted")]');
   }
   async validateInstType() {
     await expect(this.instType).toHaveTextContaining("n1-standard-8");
   }
 
   get region() {
-    return $('//*[@id="compute"]/md-list/md-list-item[1]');
+    return $(
+      '//md-list/md-list-item/div[@class = "md-list-item-text ng-binding"]'
+    );
   }
   async validateRegion() {
     await expect(this.region).toHaveTextContaining("Frankfurt");
   }
 
   get SSD() {
-    return $('//*[@id="compute"]/md-list/md-list-item[7]/div[1]');
+    return $('//md-list-item[contains(@ng-if, "item.items.ssd")]');
   }
   async validateSSD() {
     await expect(this.SSD).toHaveTextContaining("2x375");
   }
 
   get term() {
-    return $('//*[@id="compute"]/md-list/md-list-item[3]');
+    return $('//md-list-item[contains(@ng-if, "item.items.termText")]');
   }
   async validateTerm() {
-    await expect(this.term).toHaveTextContaining("1 Year");  
+    await expect(this.term).toHaveTextContaining("1 Year");
   }
 }
 
-module.exports = new gCloudSetupPage();
+module.exports = new GCloudSetupPage();

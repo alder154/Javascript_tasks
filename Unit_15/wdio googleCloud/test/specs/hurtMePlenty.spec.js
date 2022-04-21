@@ -1,47 +1,46 @@
-const gCloudSetupPage = require("../pageobjects/googleCalc.page");
+const GCloudSetupPage = require("../pageobjects/googleCalc.page");
 
 describe("Hurt-me-plenty task", async () => {
-  //let link = 'https://cloud.google.com/';
-  let link = "https://cloudpricingcalculator.appspot.com/";
-  let price = "1,082";
+  let link = "https://cloud.google.com/";
+  let price = " 4,026.13";
 
   it("open browser", async () => {
-    await gCloudSetupPage.open(link);
+    await GCloudSetupPage.open(link);
   });
 
-  it.skip("navigate to COMPUTE ENGINE", async () => {
-    await gCloudSetupPage.navigateToComputeEngine();
+  it("navigate to COMPUTE ENGINE", async () => {
+    await GCloudSetupPage.navigateToComputeEngine();
   });
 
-  it.skip("switch to proper iFrame", async () => {
-    await gCloudSetupPage.switchToCalcFrame();
-  })
+  it("switch to proper iFrame", async () => {
+    await GCloudSetupPage.switchToCalcFrame();
+  });
 
   it("calculate the price", async () => {
-    await gCloudSetupPage.setParamToCalc();
+    await GCloudSetupPage.setParamToCalc();
   });
 
   it("validate total cost", async () => {
-    await gCloudSetupPage.validatePrice(price);
+    await GCloudSetupPage.validatePrice(price);
   });
 
   it("validate VMClass", async () => {
-    await gCloudSetupPage.validateVMClass();
+    await GCloudSetupPage.validateVMClass();
   });
 
   it("validate instance type", async () => {
-    await gCloudSetupPage.validateInstType();
+    await GCloudSetupPage.validateInstType();
   });
 
   it("validate region", async () => {
-    await gCloudSetupPage.validateRegion();
+    await GCloudSetupPage.validateRegion();
   });
 
   it("validate SSD setup", async () => {
-    await gCloudSetupPage.validateSSD();
+    await GCloudSetupPage.validateSSD();
   });
 
   it("validate commitment term", async () => {
-    await gCloudSetupPage.validateTerm();
+    await GCloudSetupPage.validateTerm();
   });
 });
