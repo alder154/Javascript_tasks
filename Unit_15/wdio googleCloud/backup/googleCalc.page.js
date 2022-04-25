@@ -1,7 +1,6 @@
 const GCloudPage = require("./gCloud.page");
-const ConfigValidation = require("../../model/configValidation");
-const LocatorsForConfig = require("../../model/locatorsForConfig");
-
+const LocatorsForConfig = require("../model/locatorsForConfig");
+// убираю this и пишу LocatorsForConfig.
 class GCloudSetupPage extends GCloudPage {
   async open(link) {
     return super.open(link);
@@ -51,64 +50,64 @@ class GCloudSetupPage extends GCloudPage {
     );
   }
   get numberInstances() {
-    return $(LocatorsForConfig.numberInstances)
+    return LocatorsForConfig.numberInstances
   }
   get setOSDropDown() {
     return $("#select_value_label_73");
   }
   get setFreeOS() {
-    return $(LocatorsForConfig.setFreeOS);
+    return LocatorsForConfig.setFreeOS;
   }
   get machineClassDropDown() {
     return $("#select_value_label_74");
   }
   get machineClassRegular() {
-    return $(LocatorsForConfig.machineClassRegular);
+    return LocatorsForConfig.machineClassRegular;
   }
   get instSeriesDropDown() {
     return $("#select_value_label_76");
   }
   get instSeriesN1() {
-    return $(LocatorsForConfig.instSeriesN1);
+    return LocatorsForConfig.instSeriesN1;
   }
   get mashTypeDropDown() {
     return $("#select_value_label_77");
   }
   get mashTypeN130Gb() {
-    return $(LocatorsForConfig.mashTypeN130Gb);
+    return LocatorsForConfig.mashTypeN130Gb;
   }
   get addGPU() {
-    return $(LocatorsForConfig.addGPU);
+    return LocatorsForConfig.addGPU;
   }
   get GPUDropDown() {
     return $("#select_460");
   }
   get TeslaP100() {
-    return $(LocatorsForConfig.TeslaP100);
+    return LocatorsForConfig.TeslaP100;
   }
   get GPUNumberDropDown() {
     return $("#select_462");
   }
   get addOneGpu() {
-    return $(LocatorsForConfig.addOneGpu);
+    return LocatorsForConfig.addOneGpu;
   }
   get SSDDropDown() {
     return $("#select_422");
   }
   get SSD2x375() {
-    return $(LocatorsForConfig.SSD2x375);
+    return LocatorsForConfig.SSD2x375;
   }
   get locationDropDown() {
     return $("#select_114");
   }
   get locationFrankfurt() {
-    return $(LocatorsForConfig.locationFrankfurt);
+    return LocatorsForConfig.locationFrankfurt;
   }
   get usageDropDown() {
     return $("#select_121");
   }
   get usage1Year() {
-    return $(LocatorsForConfig.usage1Year);
+    return LocatorsForConfig.usage1Year;
   }
   get estimateButton() {
     return $(
@@ -117,13 +116,16 @@ class GCloudSetupPage extends GCloudPage {
   }
   async setParamToCalc() {
     await this.computeEngine.click();
-    await this.numberInstances.setValue(ConfigValidation.numberInstances);
+    await this.numberInstances.setValue("4");
 
     await this.setOSDropDown.click();
     await this.setFreeOS.click();
 
     await this.machineClassDropDown.click();
     await this.machineClassRegular.click();
+
+    await this.instSeriesDropDown.click();
+    await this.instSeriesN1.click();
 
     await this.instSeriesDropDown.click();
     await this.instSeriesN1.click();

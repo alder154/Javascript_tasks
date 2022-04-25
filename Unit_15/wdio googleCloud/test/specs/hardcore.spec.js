@@ -1,6 +1,6 @@
 const GCloudSetupPage = require("../pageobjects/googleCalc.page");
 const YopmailPage = require("../pageobjects/yopmail.page");
-const { generateMail } = require("../../utils/generateMail");
+const { generateMail } = require("../../utilities/generateMail");
 
 describe("Hardcore", async () => {
   let link = "https://cloud.google.com/";
