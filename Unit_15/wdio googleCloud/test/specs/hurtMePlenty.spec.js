@@ -1,12 +1,20 @@
-const googleCalcPage = require("../pageobjects/googleCalc.page");
 const GCloudSetupPage = require("../pageobjects/googleCalc.page");
+const ConfigValidation = require("../../model/configValidation");
+//const {scrnshotName} = require('../../utilities/genScrnshotName')
 
 describe("Hurt-me-plenty task", async () => {
   let link = "https://cloud.google.com/";
-  let cost = " 4,026.13";
+  let cost = ConfigValidation.cost;
+  let reqVMClass = ConfigValidation.VMClass;
+  let reqInstType = ConfigValidation.instType;
+  let reqRegion = ConfigValidation.region;
+  let reqSSD = ConfigValidation.SSD;
+  let reqTerm = ConfigValidation.term;
 
   before(async () => {
     await GCloudSetupPage.open(link);
+    //await browser.takeScreenshot();
+    //await browser.saveScreenshot(`/Users/Sanya/EPAM tasks on work/wdio googleCloud/screenshots/${scrnshotName}.png`);
     await GCloudSetupPage.navigateToComputeEngine();
     await GCloudSetupPage.switchToCalcFrame();
     await GCloudSetupPage.setParamToCalc();
@@ -19,26 +27,27 @@ describe("Hurt-me-plenty task", async () => {
 
   it("validate VMClass", async () => {
     let VMClass = await GCloudSetupPage.VMClass;
-    await expect(VMClass).toHaveTextContaining("regular");
+    //await expect(VMClass).toHaveTextContaining(reqVMClass);
+    await expect(VMClass).toHaveTextContaining("pool");
   });
 
   it("validate instance type", async () => {
     let instType = await GCloudSetupPage.instType;
-    await expect(instType).toHaveTextContaining("n1-standard-8");
+    await expect(instType).toHaveTextContaining(reqInstType);
   });
 
   it("validate region", async () => {
     let region = await GCloudSetupPage.region;
-    await expect(region).toHaveTextContaining("Frankfurt");
+    await expect(region).toHaveTextContaining(reqRegion);
   });
 
   it("validate SSD setup", async () => {
     let SSD = await GCloudSetupPage.SSD;
-    await expect(SSD).toHaveTextContaining("2x375");
+    await expect(SSD).toHaveTextContaining(reqSSD);
   });
 
   it("validate commitment term", async () => {
     let term = await GCloudSetupPage.term;
-    await expect(term).toHaveTextContaining("1 Year");
+    await expect(term).toHaveTextContaining(reqTerm);
   });
 });

@@ -1,4 +1,7 @@
 const GCloudPage = require("./gCloud.page");
+const ConfigValidation = require("../../model/configValidation");
+const LocatorsForConfig = require("../../model/locatorsForConfig");
+
 class GCloudSetupPage extends GCloudPage {
   async open(link) {
     return super.open(link);
@@ -48,64 +51,64 @@ class GCloudSetupPage extends GCloudPage {
     );
   }
   get numberInstances() {
-    return $("#input_81");
+    return $(LocatorsForConfig.numberInstances)
   }
   get setOSDropDown() {
     return $("#select_value_label_73");
   }
   get setFreeOS() {
-    return $("#select_option_83");
+    return $(LocatorsForConfig.setFreeOS);
   }
   get machineClassDropDown() {
     return $("#select_value_label_74");
   }
   get machineClassRegular() {
-    return $("#select_option_96");
+    return $(LocatorsForConfig.machineClassRegular);
   }
   get instSeriesDropDown() {
     return $("#select_value_label_76");
   }
   get instSeriesN1() {
-    return $("#select_option_221");
+    return $(LocatorsForConfig.instSeriesN1);
   }
   get mashTypeDropDown() {
     return $("#select_value_label_77");
   }
   get mashTypeN130Gb() {
-    return $("#select_option_427");
+    return $(LocatorsForConfig.mashTypeN130Gb);
   }
   get addGPU() {
-    return $('//*[@ng-model="listingCtrl.computeServer.addGPUs"]');
+    return $(LocatorsForConfig.addGPU);
   }
   get GPUDropDown() {
     return $("#select_460");
   }
   get TeslaP100() {
-    return $("#select_option_465");
+    return $(LocatorsForConfig.TeslaP100);
   }
   get GPUNumberDropDown() {
     return $("#select_462");
   }
   get addOneGpu() {
-    return $("#select_option_471");
+    return $(LocatorsForConfig.addOneGpu);
   }
   get SSDDropDown() {
     return $("#select_422");
   }
   get SSD2x375() {
-    return $("#select_option_448");
+    return $(LocatorsForConfig.SSD2x375);
   }
   get locationDropDown() {
     return $("#select_114");
   }
   get locationFrankfurt() {
-    return $("#select_option_242");
+    return $(LocatorsForConfig.locationFrankfurt);
   }
   get usageDropDown() {
     return $("#select_121");
   }
   get usage1Year() {
-    return $("#select_option_119");
+    return $(LocatorsForConfig.usage1Year);
   }
   get estimateButton() {
     return $(
@@ -114,16 +117,13 @@ class GCloudSetupPage extends GCloudPage {
   }
   async setParamToCalc() {
     await this.computeEngine.click();
-    await this.numberInstances.setValue("4");
+    await this.numberInstances.setValue(ConfigValidation.numberInstances);
 
     await this.setOSDropDown.click();
     await this.setFreeOS.click();
 
     await this.machineClassDropDown.click();
     await this.machineClassRegular.click();
-
-    await this.instSeriesDropDown.click();
-    await this.instSeriesN1.click();
 
     await this.instSeriesDropDown.click();
     await this.instSeriesN1.click();
